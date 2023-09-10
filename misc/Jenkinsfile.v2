@@ -9,14 +9,14 @@ node {
      def myTestContainer = docker.image('node:16')
      myTestContainer.pull()
      myTestContainer.inside {
-           sh 'cat /etc/passwd'
-	   sh 'echo $HOME'
-	   sh 'ls -l' 
-    	   sh 'echo $PWD'
+           sh 'HOME=$PWD cat /etc/passwd'
+	   sh 'HOME=$PWD echo $HOME'
+	   sh 'HOME=$PWD ls -l' 
+    	   sh 'HOME=$PWD echo $PWD'
 	   dir(pwd()) {
-                 sh 'echo $PWD'
-		 sh 'npm install --only=dev'
-		 sh 'npm test'
+                 sh 'HOME=$PWD echo $PWD'
+		 sh 'HOME=$PWD npm install --only=dev'
+		 sh 'HOME=$PWD npm test'
 	   }
        
      }
@@ -27,8 +27,8 @@ node {
      myTestContainer.pull()
      myTestContainer.inside("--link ${mysql.id}:mysql") { // using linking, mysql will be available at host: mysql, port: 3306
 		dir(pwd()) {
-		  sh 'npm install --only=dev' 
-		  sh 'npm test'                     
+		  sh 'HOME=$PWD npm install --only=dev' 
+		  sh 'HOME=$PWD npm test'                     
 		}
      }                                   
      mysql.stop()
