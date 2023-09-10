@@ -9,6 +9,7 @@ node {
      def myTestContainer = docker.image('node:16')
      myTestContainer.pull()
      myTestContainer.inside {
+           sh 'cat /etc/passwd'
 	   sh 'echo $HOME'
 	   sh 'ls -l' 
     	   sh 'echo $PWD'
