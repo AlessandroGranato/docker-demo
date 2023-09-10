@@ -10,13 +10,13 @@ node {
      myTestContainer.pull()
      myTestContainer.inside {
            sh 'HOME=$PWD cat /etc/passwd'
-           sh 'echo before $HOME
+           sh 'echo before $HOME'
 	   sh 'HOME=$PWD echo $HOME'
 	   sh 'echo after $HOME'
 	   sh 'HOME=$PWD ls -l' 
     	   sh 'HOME=$PWD echo $PWD'
 	   dir(pwd()) {
-		sh 'echo $pwd'
+		sh 'echo $PWD'
 		sh 'echo $HOME'
                  sh 'HOME=$PWD echo $PWD'
 		 sh 'HOME=$PWD npm install --only=dev'
