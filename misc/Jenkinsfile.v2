@@ -10,7 +10,10 @@ node {
      myTestContainer.pull()
      myTestContainer.inside {
 	   sh 'echo $HOME'
+	   sh 'ls -l' 
+    	   sh 'echo $PWD'
 	   dir(pwd()) {
+                 sh 'echo $PWD'
 		 sh 'npm install --only=dev'
 		 sh 'npm test'
 	   }
